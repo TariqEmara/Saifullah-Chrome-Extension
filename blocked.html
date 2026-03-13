@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Saifullah — سيف الله</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{min-height:100vh;font-family:"Times New Roman",Georgia,serif;overflow-x:hidden;}
+
+/* ── THEMES — background image set by JS, color = text ── */
+body.gold   {background:#0b0700;color:#f5e0a0;}
+body.blue   {background:#030610;color:#d0dcff;}
+body.green  {background:#020c05;color:#c8eed4;}
+body.rose   {background:#080305;color:#f5d0e0;}
+body.purple {background:#04040d;color:#e0dcff;}
+body.parch  {background:#070500;color:#f5e8cc;}
+body.teal   {background:#010b0d;color:#c8f0f8;}
+body.prophet{background:#000306;color:#dde8ff;}
+
+/* Dark overlay so text stays readable over images */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background:rgba(0,0,0,.60);pointer-events:none;
+}
+
+/* ── SILHOUETTE LAYER — hidden now, images used instead ── */
+#silhouette{display:none;}
+
+/* ── SAHABI PAGE CONTENT ── */
+.wrap{position:relative;z-index:2;max-width:660px;margin:0 auto;padding:44px 24px 100px;}
+
+.icon{font-size:58px;text-align:center;margin-bottom:16px;display:block;
+  animation:fl 3.5s ease-in-out infinite;}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+.name-ar{font-size:40px;text-align:center;line-height:1.3;margin-bottom:5px;font-weight:bold;}
+.name-en{font-size:11px;letter-spacing:5px;text-transform:uppercase;text-align:center;
+  margin-bottom:4px;direction:ltr;opacity:.40;}
+.name-title{font-size:13px;font-style:italic;text-align:center;margin-bottom:20px;direction:ltr;opacity:.55;}
+
+.sep{text-align:center;letter-spacing:4px;font-size:12px;margin-bottom:20px;opacity:.40;overflow:hidden;}
+.sep::before,.sep::after{content:'';display:inline-block;width:80px;height:1px;
+  vertical-align:middle;margin:0 10px;background:currentColor;opacity:.35;}
+
+.card{border-radius:14px;padding:24px 28px;margin-bottom:15px;text-align:center;}
+body.gold  .card{background:rgba(36,18,0,.80);border:1px solid rgba(195,125,8,.26);}
+body.blue  .card{background:rgba(9,17,60,.80);border:1px solid rgba(85,125,225,.21);}
+body.green .card{background:rgba(4,27,10,.80);border:1px solid rgba(42,125,60,.21);}
+body.rose  .card{background:rgba(38,4,22,.80);border:1px solid rgba(135,34,85,.24);}
+body.purple.card{background:rgba(12,8,48,.80);border:1px solid rgba(88,72,158,.24);}
+body.parch .card{background:rgba(30,14,0,.80);border:1px solid rgba(148,93,24,.24);}
+body.teal  .card{background:rgba(2,28,35,.80);border:1px solid rgba(24,132,148,.24);}
+
+.ayah-ar{font-size:24px;line-height:2.2;margin-bottom:12px;font-weight:bold;}
+body.gold  .ayah-ar{color:#ffd060;}
+body.blue  .ayah-ar{color:#d8e8ff;}
+body.green .ayah-ar{color:#7ed89e;}
+body.rose  .ayah-ar{color:#f898cc;}
+body.purple.ayah-ar{color:#c2b6ff;}
+body.parch .ayah-ar{color:#eebe4e;}
+body.teal  .ayah-ar{color:#6edae5;}
+
+.ayah-en{font-size:13px;font-style:italic;line-height:1.85;margin-bottom:8px;direction:ltr;opacity:.66;}
+.ayah-ref{font-size:11px;direction:ltr;opacity:.36;}
+
+.shame{border-radius:10px;padding:14px 20px;text-align:center;font-style:italic;font-size:15px;
+  margin-bottom:15px;direction:ltr;line-height:1.75;background:rgba(0,0,0,.50);
+  border:1px solid rgba(255,255,255,.06);}
+.shame b{font-style:normal;}
+body.gold  .shame b{color:#f5b228;}
+body.blue  .shame b{color:#98b6ff;}
+body.green .shame b{color:#54be6c;}
+body.rose  .shame b{color:#de4e96;}
+body.purple.shame b{color:#9a88de;}
+body.parch .shame b{color:#c88e2e;}
+body.teal  .shame b{color:#34bccc;}
+
+.qbox{border-radius:0 12px 12px 0;padding:14px 18px;margin-bottom:15px;direction:ltr;background:rgba(0,0,0,.32);}
+body.gold  .qbox{border-left:3px solid #c47e08;}
+body.blue  .qbox{border-left:3px solid #6474c6;}
+body.green .qbox{border-left:3px solid #34874c;}
+body.rose  .qbox{border-left:3px solid #86305e;}
+body.purple.qbox{border-left:3px solid #5e4e96;}
+body.parch .qbox{border-left:3px solid #925e1c;}
+body.teal  .qbox{border-left:3px solid #1c8696;}
+
+.qtext{font-size:14px;font-style:italic;line-height:1.85;opacity:.80;}
+.qwho{font-size:12px;margin-top:7px;opacity:.46;}
+
+.mh{font-size:17px;font-style:italic;text-align:center;line-height:1.75;margin-bottom:20px;direction:ltr;opacity:.87;}
+.mh b{font-style:normal;font-size:19px;}
+body.gold  .mh b{color:#ffd060;}  body.blue  .mh b{color:#d8e8ff;}
+body.green .mh b{color:#7ed89e;}  body.rose  .mh b{color:#f898cc;}
+body.purple.mh b{color:#c2b6ff;}  body.parch .mh b{color:#eebe4e;}
+body.teal  .mh b{color:#6edae5;}
+
+body.gold  .name-ar{color:#f5b228;}  body.blue  .name-ar{color:#98b6ff;}
+body.green .name-ar{color:#54be6c;}  body.rose  .name-ar{color:#de4e96;}
+body.purple.name-ar{color:#9a88de;}  body.parch .name-ar{color:#c88e2e;}
+body.teal  .name-ar{color:#34bccc;}
+
+.cnt{text-align:center;font-size:12px;opacity:.30;margin-bottom:13px;direction:ltr;}
+.cnt span{font-size:15px;font-weight:bold;opacity:1;}
+.btn{display:block;text-align:center;padding:13px 36px;border-radius:50px;font-size:15px;
+  text-decoration:none;margin-bottom:22px;font-family:inherit;transition:filter .2s;}
+body.gold  .btn{color:#f5b228;border:1px solid rgba(242,178,40,.28);background:rgba(242,178,40,.07);}
+body.blue  .btn{color:#98b6ff;border:1px solid rgba(118,146,255,.28);background:rgba(118,146,255,.07);}
+body.green .btn{color:#54be6c;border:1px solid rgba(56,155,76,.28);background:rgba(56,155,76,.07);}
+body.rose  .btn{color:#de4e96;border:1px solid rgba(196,56,116,.28);background:rgba(196,56,116,.07);}
+body.purple.btn{color:#9a88de;border:1px solid rgba(135,115,215,.28);background:rgba(135,115,215,.07);}
+body.parch .btn{color:#c88e2e;border:1px solid rgba(184,122,26,.28);background:rgba(184,122,26,.07);}
+body.teal  .btn{color:#34bccc;border:1px solid rgba(36,172,195,.28);background:rgba(36,172,195,.07);}
+.btn:hover{filter:brightness(1.45);}
+.foot{text-align:center;font-size:10px;letter-spacing:3px;text-transform:uppercase;direction:ltr;opacity:.11;}
+
+/* ═══════════════════════════════════════════
+   PROPHET ﷺ — FULL SCREEN MAJESTIC
+═══════════════════════════════════════════ */
+#p0{
+  position:fixed;inset:0;z-index:10;
+  display:none;
+  overflow:hidden;
+}
+/* starfield / deep night sky background */
+#p0-bg{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:0;
+}
+/* grand mosque silhouette fills bottom half */
+#p0-mosque{
+  position:absolute;bottom:0;left:0;right:0;
+  width:100%;height:60vh;min-height:350px;
+  z-index:1;opacity:.12;
+}
+/* radiant glow behind name */
+#p0-glow{
+  position:absolute;
+  top:18%;left:50%;transform:translateX(-50%);
+  width:600px;height:300px;
+  background:radial-gradient(ellipse, rgba(100,160,255,.18) 0%, rgba(60,100,200,.06) 50%, transparent 75%);
+  z-index:2;pointer-events:none;
+  border-radius:50%;
+}
+/* scrollable content on top */
+#p0-scroll{
+  position:absolute;inset:0;z-index:4;
+  overflow-y:auto;
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding:4vh 20px 80px;
+}
+.p-bismillah{
+  font-size:clamp(22px,3.5vw,32px);color:rgba(180,212,255,.45);
+  letter-spacing:5px;margin-bottom:3vh;text-align:center;
+  text-shadow:0 0 30px rgba(120,170,255,.3);
+}
+.p-moon{font-size:52px;margin-bottom:2vh;text-align:center;
+  animation:fl 4s ease-in-out infinite;}
+.p-name{
+  font-size:clamp(44px,8vw,82px);
+  color:#ccdeff;font-weight:bold;text-align:center;
+  line-height:1.15;margin-bottom:8px;
+  text-shadow:0 0 60px rgba(140,185,255,.45),0 0 120px rgba(80,130,255,.25),0 2px 4px rgba(0,0,0,.8);
+}
+.p-saw{
+  font-size:clamp(13px,2vw,17px);
+  color:rgba(155,195,255,.50);text-align:center;
+  letter-spacing:4px;margin-bottom:3.5vh;direction:ltr;
+  text-transform:uppercase;
+}
+/* thin gold/silver rule */
+.p-rule{
+  width:min(480px,90%);height:1px;
+  background:linear-gradient(to right, transparent, rgba(160,200,255,.35), transparent);
+  margin:0 auto 3.5vh;
+}
+.p-ayah-card{
+  background:rgba(6,16,52,.80);
+  border:1px solid rgba(88,138,240,.20);
+  border-radius:18px;padding:28px 36px;
+  max-width:640px;width:100%;
+  text-align:center;margin-bottom:3vh;
+}
+.p-ayah-ar{
+  font-size:clamp(20px,3.5vw,28px);line-height:2.1;
+  color:#c0d8ff;font-weight:bold;margin-bottom:14px;
+}
+.p-ayah-en{font-size:14px;font-style:italic;color:rgba(178,208,255,.62);direction:ltr;line-height:1.8;margin-bottom:8px;}
+.p-ayah-ref{font-size:11px;color:rgba(118,158,240,.42);direction:ltr;}
+.p-shame{
+  font-size:clamp(15px,2.2vw,18px);font-style:italic;text-align:center;direction:ltr;
+  color:rgba(180,212,255,.58);margin-bottom:3vh;line-height:1.8;
+  max-width:600px;
+}
+.p-shame b{color:#a0c8ff;font-style:normal;font-size:clamp(17px,2.5vw,21px);}
+.p-heart{
+  max-width:640px;width:100%;
+  background:rgba(4,14,50,.72);
+  border:1px solid rgba(86,138,240,.16);
+  border-radius:16px;
+  padding:28px 34px;margin-bottom:3vh;direction:ltr;
+}
+.p-heart p{
+  font-size:clamp(14px,1.8vw,16px);line-height:2.1;
+  margin-bottom:14px;color:rgba(202,226,255,.78);
+}
+.p-heart p:last-child{margin-bottom:0;}
+.p-heart em{font-style:normal;font-weight:bold;color:#a6ccff;}
+.p-call{
+  font-size:clamp(20px,3.5vw,28px);text-align:center;font-style:italic;
+  color:#b6d6ff;margin-bottom:3vh;direction:ltr;line-height:1.6;
+  text-shadow:0 0 40px rgba(120,170,255,.35);
+  max-width:600px;
+}
+.p-cnt{text-align:center;font-size:12px;opacity:.26;margin-bottom:12px;direction:ltr;}
+.p-cnt span{font-size:14px;font-weight:bold;opacity:1;color:#96b6ff;}
+.p-btn{
+  color:#96b6ff;border:1px solid rgba(100,148,255,.28);
+  background:rgba(100,148,255,.07);
+  display:inline-block;padding:13px 38px;border-radius:50px;
+  font-size:15px;text-decoration:none;font-family:inherit;
+  transition:filter .2s;letter-spacing:1px;
+}
+.p-btn:hover{filter:brightness(1.45);}
+</style>
+</head>
+<body class="gold">
+
+<!-- Silhouette layer (sahabi pages) -->
+<div id="silhouette"></div>
+
+<!-- ═══ SAHABI PAGES ═════════════════════════════════════════ -->
+<div class="wrap">
+
+<!-- PAGE 1: KHALID -->
+<div id="p1" style="display:none">
+  <span class="icon">⚔️</span>
+  <div class="name-ar">خالد بن الوليد</div>
+  <div class="name-en">KHALID IBN AL-WALID</div>
+  <div class="name-title">سيف الله المسلول — The Drawn Sword of Allah</div>
+  <div class="sep">⚔ سيف الله ⚔</div>
+  <div class="card">
+    <div class="ayah-ar">يَسْتَخْفُونَ مِنَ النَّاسِ وَلَا يَسْتَخْفُونَ مِنَ اللَّهِ وَهُوَ مَعَهُمْ إِذْ يُبَيِّتُونَ مَا لَا يَرْضَىٰ مِنَ الْقَوْلِ</div>
+    <div class="ayah-en">"They hide from people but cannot hide from Allah — He is with them when they spend the night plotting what He does not approve of."</div>
+    <div class="ayah-ref">Surah An-Nisa 4:108 — سورة النساء</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"O Khalid! You are the Sword of Allah. Allah has unsheathed you upon His enemies."</div>
+    <div class="qwho">— The Prophet Muhammad ﷺ, bestowing the title Saifullah upon Khalid ibn al-Walid (رضي الله عنه)</div>
+  </div>
+  <div class="mh">He wept on his deathbed, wishing he had died in battle. Not a hand-span of his body was free of a wound.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 2: ABU BAKR -->
+<div id="p2" style="display:none">
+  <span class="icon">🌄</span>
+  <div class="name-ar">أبو بكر الصِّدِّيق</div>
+  <div class="name-en">ABU BAKR AS-SIDDIQ</div>
+  <div class="name-title">The Truthful — First Caliph of Islam</div>
+  <div class="sep">✦ الصديق ✦</div>
+  <div class="card">
+    <div class="ayah-ar">إِذْ هُمَا فِي الْغَارِ إِذْ يَقُولُ لِصَاحِبِهِ لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا</div>
+    <div class="ayah-en">"When they were in the cave — when he said to his companion: Do not grieve, indeed Allah is with us."</div>
+    <div class="ayah-ref">Surah At-Tawbah 9:40 — سورة التوبة</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"When I accepted Islam, I never doubted for a single moment."</div>
+    <div class="qwho">— Abu Bakr as-Siddiq (رضي الله عنه) — the only one who believed without hesitation</div>
+  </div>
+  <div class="mh">He sat beside the Prophet ﷺ in the cave, willing to die for him. The Quran recorded that moment for eternity.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 3: UMAR -->
+<div id="p3" style="display:none">
+  <span class="icon">⚖️</span>
+  <div class="name-ar">عُمَر بن الخطَّاب</div>
+  <div class="name-en">UMAR IBN AL-KHATTAB</div>
+  <div class="name-title">الفاروق — He Who Distinguishes Truth from Falsehood</div>
+  <div class="sep">⚖ الفاروق ⚖</div>
+  <div class="card">
+    <div class="ayah-ar">يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَقُولُوا قَوْلًا سَدِيدًا</div>
+    <div class="ayah-en">"O you who have believed, fear Allah and speak words of appropriate justice."</div>
+    <div class="ayah-ref">Surah Al-Ahzab 33:70 — سورة الأحزاب</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"Hold yourself accountable before you are held accountable. Weigh your deeds before they are weighed against you."</div>
+    <div class="qwho">— Umar ibn al-Khattab (رضي الله عنه)</div>
+  </div>
+  <div class="mh">The Prophet ﷺ said: "If there were a prophet after me, it would be Umar." Shaitan changed his path to avoid crossing his shadow.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 4: ALI -->
+<div id="p4" style="display:none">
+  <span class="icon">🦁</span>
+  <div class="name-ar">عليُّ بن أبي طالب</div>
+  <div class="name-en">ALI IBN ABI TALIB</div>
+  <div class="name-title">أسد الله — Lion of Allah, Gate of the City of Knowledge</div>
+  <div class="sep">✦ أسد الله ✦</div>
+  <div class="card">
+    <div class="ayah-ar">إِنَّمَا وَلِيُّكُمُ اللَّهُ وَرَسُولُهُ وَالَّذِينَ آمَنُوا الَّذِينَ يُقِيمُونَ الصَّلَاةَ وَيُؤْتُونَ الزَّكَاةَ وَهُمْ رَاكِعُونَ</div>
+    <div class="ayah-en">"Your ally is none but Allah and His Messenger and those who have believed — who establish prayer and give zakah, and they bow in worship."</div>
+    <div class="ayah-ref">Surah Al-Ma'idah 5:55 — سورة المائدة</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"Conquer your desires — that is the greatest jihad."</div>
+    <div class="qwho">— Ali ibn Abi Talib (كرّم الله وجهه)</div>
+  </div>
+  <div class="mh">He was raised in the Prophet's ﷺ household, sleeping in the Prophet's bed the night of the hijra, risking his life without fear.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 5: BILAL -->
+<div id="p5" style="display:none">
+  <span class="icon">🌙</span>
+  <div class="name-ar">بِلَال بن رَبَاح</div>
+  <div class="name-en">BILAL IBN RABAH</div>
+  <div class="name-title">أول مؤذن في الإسلام — The First Muezzin of Islam</div>
+  <div class="sep">☽ أحد أحد ☽</div>
+  <div class="card">
+    <div class="ayah-ar">وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا وَإِنَّ اللَّهَ لَمَعَ الْمُحْسِنِينَ</div>
+    <div class="ayah-en">"And those who strive for Us — We will surely guide them to Our ways. Indeed, Allah is with the doers of good."</div>
+    <div class="ayah-ref">Surah Al-Ankabut 29:69 — سورة العنكبوت</div>
+  </div>
+  <div class="shame">Allah forgaved you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"They placed hot rocks on my chest in the desert sun and said: Renounce. I had only one word: Ahad. Ahad. One. One."</div>
+    <div class="qwho">— Bilal ibn Rabah (رضي الله عنه) — his body tortured, his faith unbroken</div>
+  </div>
+  <div class="mh">The Prophet ﷺ heard Bilal's footsteps in Jannah before he even died. His voice broke the silence of Fajr forever.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 6: IBN MASUD -->
+<div id="p6" style="display:none">
+  <span class="icon">📜</span>
+  <div class="name-ar">عبدُ الله بن مسعود</div>
+  <div class="name-en">ABDULLAH IBN MASUD</div>
+  <div class="name-title">حامل سر النبي ﷺ — Bearer of the Prophet's Secret</div>
+  <div class="sep">✦ القرآن ✦</div>
+  <div class="card">
+    <div class="ayah-ar">إِنَّ هَٰذَا الْقُرْآنَ يَهْدِي لِلَّتِي هِيَ أَقْوَمُ</div>
+    <div class="ayah-en">"Indeed, this Quran guides to that which is most upright."</div>
+    <div class="ayah-ref">Surah Al-Isra 17:9 — سورة الإسراء</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"I learned seventy surahs directly from the mouth of the Messenger of Allah ﷺ — yet I am not the best of his companions."</div>
+    <div class="qwho">— Abdullah ibn Masud (رضي الله عنه), in humility</div>
+  </div>
+  <div class="mh">He recited Quran once and the Prophet ﷺ stopped walking, stood still, listened — and his eyes filled with tears.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 7: ABU UBAYDA -->
+<div id="p7" style="display:none">
+  <span class="icon">🛡️</span>
+  <div class="name-ar">أبو عُبَيدة بن الجرَّاح</div>
+  <div class="name-en">ABU UBAYDA IBN AL-JARRAH</div>
+  <div class="name-title">أمين هذه الأمة — Trustee of This Nation</div>
+  <div class="sep">✦ أمين الأمة ✦</div>
+  <div class="card">
+    <div class="ayah-ar">يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا لَقِيتُمْ فِئَةً فَاثْبُتُوا وَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ</div>
+    <div class="ayah-en">"O you who have believed, when you encounter a company, stand firm and remember Allah much — that you may be successful."</div>
+    <div class="ayah-ref">Surah Al-Anfal 8:45 — سورة الأنفال</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"I wish I were a ram — that my family would slaughter and eat me — rather than be questioned about this world on the Day of Judgment."</div>
+    <div class="qwho">— Abu Ubayda ibn al-Jarrah (رضي الله عنه)</div>
+  </div>
+  <div class="mh">The Prophet ﷺ declared him the Trustee of this Ummah. He spent his last dinar, lived in ascetic poverty, and commanded armies.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 8: UTHMAN -->
+<div id="p8" style="display:none">
+  <span class="icon">📿</span>
+  <div class="name-ar">عُثمان بن عفَّان</div>
+  <div class="name-en">UTHMAN IBN AFFAN</div>
+  <div class="name-title">ذو النورين — Possessor of Two Lights</div>
+  <div class="sep">✦ ذو النورين ✦</div>
+  <div class="card">
+    <div class="ayah-ar">إِنَّ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ لَهُمْ جَنَّاتٌ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ</div>
+    <div class="ayah-en">"Indeed, those who have believed and done righteous deeds — for them are gardens beneath which rivers flow."</div>
+    <div class="ayah-ref">Surah Al-Buruj 85:11 — سورة البروج</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"I have never committed zina in Jahiliyyah nor in Islam. Since I accepted Islam, my right hand has never touched my private parts."</div>
+    <div class="qwho">— Uthman ibn Affan (رضي الله عنه), the man who married two daughters of the Prophet ﷺ</div>
+  </div>
+  <div class="mh">He financed the Army of Difficulty entirely from his own wealth. The Prophet ﷺ said: "Nothing can harm Uthman after today."<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 9: SA'D IBN ABI WAQQAS -->
+<div id="p9" style="display:none">
+  <span class="icon">🏹</span>
+  <div class="name-ar">سعد بن أبي وقَّاص</div>
+  <div class="name-en">SA'D IBN ABI WAQQAS</div>
+  <div class="name-title">أسد الإسلام — Lion of Islam, First Archer in Allah's Cause</div>
+  <div class="sep">✦ أول من رمى بسهم في الإسلام ✦</div>
+  <div class="card">
+    <div class="ayah-ar">وَمَن يُطِعِ اللَّهَ وَالرَّسُولَ فَأُولَٰئِكَ مَعَ الَّذِينَ أَنْعَمَ اللَّهُ عَلَيْهِم مِّنَ النَّبِيِّينَ وَالصِّدِّيقِينَ وَالشُّهَدَاءِ</div>
+    <div class="ayah-en">"Whoever obeys Allah and the Messenger — those will be with the ones upon whom Allah has bestowed favor: the prophets, the steadfast affirmers of truth, the martyrs."</div>
+    <div class="ayah-ref">Surah An-Nisa 4:69 — سورة النساء</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"Shoot, Sa'd — may my father and mother be your ransom!"</div>
+    <div class="qwho">— The Prophet Muhammad ﷺ, the only time he offered both parents as ransom for one companion</div>
+  </div>
+  <div class="mh">He was the first to shoot an arrow for Islam, and his du'a was always answered. The Prophet ﷺ guaranteed him Paradise by name.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 10: TALHA -->
+<div id="p10" style="display:none">
+  <span class="icon">🗡️</span>
+  <div class="name-ar">طلحة بن عُبيدالله</div>
+  <div class="name-en">TALHA IBN UBAYDULLAH</div>
+  <div class="name-title">طلحة الفياض — Talha the Generous, Walking Shaheed</div>
+  <div class="sep">✦ الشهيد الحي ✦</div>
+  <div class="card">
+    <div class="ayah-ar">مِّنَ الْمُؤْمِنِينَ رِجَالٌ صَدَقُوا مَا عَاهَدُوا اللَّهَ عَلَيْهِ فَمِنْهُم مَّن قَضَىٰ نَحْبَهُ وَمِنْهُم مَّن يَنتَظِرُ</div>
+    <div class="ayah-en">"Among the believers are men true to what they promised Allah. Among them is he who has fulfilled his vow, and among them is he who awaits."</div>
+    <div class="ayah-ref">Surah Al-Ahzab 33:23 — سورة الأحزاب</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"At Uhud, Talha used his hand as a shield for the Prophet ﷺ until the arrows paralyzed it — and he never once pulled it back."</div>
+    <div class="qwho">— Narrated about Talha ibn Ubaydullah (رضي الله عنه), whose hand was crippled protecting the Prophet ﷺ</div>
+  </div>
+  <div class="mh">He sacrificed his hand — permanently — so that the Prophet ﷺ would not be struck. The Prophet ﷺ called him a walking martyr while still alive.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 11: AZ-ZUBAYR -->
+<div id="p11" style="display:none">
+  <span class="icon">⚔️</span>
+  <div class="name-ar">الزُّبير بن العوَّام</div>
+  <div class="name-en">AZ-ZUBAYR IBN AL-AWWAM</div>
+  <div class="name-title">حواريُّ رسول الله ﷺ — The Disciple of the Messenger of Allah</div>
+  <div class="sep">✦ حواري النبي ✦</div>
+  <div class="card">
+    <div class="ayah-ar">إِنَّ اللَّهَ اشْتَرَىٰ مِنَ الْمُؤْمِنِينَ أَنفُسَهُمْ وَأَمْوَالَهُم بِأَنَّ لَهُمُ الْجَنَّةَ</div>
+    <div class="ayah-en">"Indeed, Allah has purchased from the believers their lives and their properties in exchange for that they will have Paradise."</div>
+    <div class="ayah-ref">Surah At-Tawbah 9:111 — سورة التوبة</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"Az-Zubayr ibn al-Awwam is my disciple and my cousin — and the son of my aunt."</div>
+    <div class="qwho">— The Prophet Muhammad ﷺ, naming him his personal hawari (disciple)</div>
+  </div>
+  <div class="mh">He was the first to draw a sword for Islam — a child, thirteen years old, when he unsheathed his blade to defend the Prophet ﷺ.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 12: ABD AL-RAHMAN IBN AWF -->
+<div id="p12" style="display:none">
+  <span class="icon">⚖️</span>
+  <div class="name-ar">عبد الرحمن بن عوف</div>
+  <div class="name-en">ABD AL-RAHMAN IBN AWF</div>
+  <div class="name-title">من العشرة المبشرين بالجنة — From the Ten Promised Paradise</div>
+  <div class="sep">✦ المبشر بالجنة ✦</div>
+  <div class="card">
+    <div class="ayah-ar">لَن تَنَالُوا الْبِرَّ حَتَّىٰ تُنفِقُوا مِمَّا تُحِبُّونَ</div>
+    <div class="ayah-en">"You will never attain righteousness until you spend from that which you love."</div>
+    <div class="ayah-ref">Surah Ali Imran 3:92 — سورة آل عمران</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"He came to Madinah with nothing. Within days he had built a business. He spent his entire fortune — caravans of 700 camels — in one donation for Allah."</div>
+    <div class="qwho">— Abd al-Rahman ibn Awf (رضي الله عنه), the wealthiest of the Sahabah who feared his wealth more than anyone</div>
+  </div>
+  <div class="mh">He wept when his wealth grew, fearing it would slow him to Paradise. He gave everything — again and again — and was promised Jannah while still breathing.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 13: SALMAN AL-FARISI -->
+<div id="p13" style="display:none">
+  <span class="icon">🌍</span>
+  <div class="name-ar">سلمان الفارسي</div>
+  <div class="name-en">SALMAN AL-FARISI</div>
+  <div class="name-title">سلمان منَّا أهل البيت — "Salman is from us, the People of the House"</div>
+  <div class="sep">✦ من أهل البيت ✦</div>
+  <div class="card">
+    <div class="ayah-ar">وَالَّذِينَ جَاءُوا مِن بَعْدِهِمْ يَقُولُونَ رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ</div>
+    <div class="ayah-en">"And those who came after them, saying: Our Lord, forgive us and our brothers who preceded us in faith."</div>
+    <div class="ayah-ref">Surah Al-Hashr 59:10 — سورة الحشر</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"I left Persia. I traveled for years across deserts and empires. I was enslaved. I suffered. All to find the Last Prophet. And when I saw his face — I knew."</div>
+    <div class="qwho">— Salman al-Farisi (رضي الله عنه), who gave up everything — family, homeland, freedom — to reach the truth</div>
+  </div>
+  <div class="mh">He crossed continents, endured slavery, spent decades searching — and Allah guided him. The Prophet ﷺ said Salman was from his own household.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 14: HUDHAYFAH IBN AL-YAMAN -->
+<div id="p14" style="display:none">
+  <span class="icon">🔐</span>
+  <div class="name-ar">حُذيفة بن اليَمان</div>
+  <div class="name-en">HUDHAYFAH IBN AL-YAMAN</div>
+  <div class="name-title">صاحب سر رسول الله ﷺ — Keeper of the Prophet's Secrets</div>
+  <div class="sep">✦ صاحب السر ✦</div>
+  <div class="card">
+    <div class="ayah-ar">أَلَا إِنَّ أَوْلِيَاءَ اللَّهِ لَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ</div>
+    <div class="ayah-en">"Unquestionably, the allies of Allah — there will be no fear concerning them, nor will they grieve."</div>
+    <div class="ayah-ref">Surah Yunus 10:62 — سورة يونس</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"The Prophet ﷺ told me the names of every hypocrite in Madinah. When Umar led a funeral, he would look at my face to see if I walked behind it."</div>
+    <div class="qwho">— Hudhayfah ibn al-Yaman (رضي الله عنه), the only companion entrusted with the list of hypocrites</div>
+  </div>
+  <div class="mh">He alone knew who the hypocrites were. He was the spy of the Prophet ﷺ, sent alone into enemy camps in the dark. He feared nothing but Allah.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 15: MUADH IBN JABAL -->
+<div id="p15" style="display:none">
+  <span class="icon">🌟</span>
+  <div class="name-ar">مُعاذ بن جَبَل</div>
+  <div class="name-en">MUADH IBN JABAL</div>
+  <div class="name-title">أعلم الأمة بالحلال والحرام — Most Knowledgeable in Halal and Haram</div>
+  <div class="sep">✦ إمام العلماء ✦</div>
+  <div class="card">
+    <div class="ayah-ar">يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ</div>
+    <div class="ayah-en">"Allah will raise those who have believed among you and those who were given knowledge by degrees."</div>
+    <div class="ayah-ref">Surah Al-Mujadila 58:11 — سورة المجادلة</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"Learn knowledge, for learning it for Allah's sake is fear of Him. Seeking it is worship. Reviewing it is glorification. Acting on it is jihad."</div>
+    <div class="qwho">— Muadh ibn Jabal (رضي الله عنه)</div>
+  </div>
+  <div class="mh">The Prophet ﷺ said: "The most knowledgeable of my Ummah in halal and haram is Muadh ibn Jabal." He wept at every salah from love and awe of Allah.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- PAGE 16: ANAS IBN MALIK -->
+<div id="p16" style="display:none">
+  <span class="icon">🤲</span>
+  <div class="name-ar">أنس بن مالك</div>
+  <div class="name-en">ANAS IBN MALIK</div>
+  <div class="name-title">خادم رسول الله ﷺ — The Servant of the Messenger of Allah</div>
+  <div class="sep">✦ خادم النبي ✦</div>
+  <div class="card">
+    <div class="ayah-ar">وَاصْبِرْ نَفْسَكَ مَعَ الَّذِينَ يَدْعُونَ رَبَّهُم بِالْغَدَاةِ وَالْعَشِيِّ يُرِيدُونَ وَجْهَهُ</div>
+    <div class="ayah-en">"And keep yourself patient with those who call upon their Lord morning and evening, seeking His face."</div>
+    <div class="ayah-ref">Surah Al-Kahf 18:28 — سورة الكهف</div>
+  </div>
+  <div class="shame">Allah forgave you — <b>and this is how you act towards Him?</b></div>
+  <div class="qbox">
+    <div class="qtext">"I served the Prophet ﷺ for ten years and he never once said 'uff' to me — never said 'why did you do this' or 'why didn't you do that.'"</div>
+    <div class="qwho">— Anas ibn Malik (رضي الله عنه), who entered the Prophet's household as a child of ten</div>
+  </div>
+  <div class="mh">He spent ten years in the Prophet's ﷺ home, learning his every manner and habit. He carried that light for ninety years, teaching the world how the Prophet ﷺ lived.<br><b>Don't you want to meet him?</b></div>
+</div>
+
+<!-- SHARED FOOTER -->
+<div id="sahabi-footer" style="display:none">
+  <div class="cnt">Saifullah has blocked <span id="cnt">—</span> attempts</div>
+  <a href="javascript:history.back()" class="btn">← ارجع إلى الطريق المستقيم &nbsp;|&nbsp; Return</a>
+  <div class="foot">Saifullah · سيف الله المسلول · v5</div>
+</div>
+</div><!-- .wrap -->
+
+<!-- ═══════════════════════════════════════════════════
+     PAGE 0: PROPHET ﷺ — FULL SCREEN MAJESTIC
+═══════════════════════════════════════════════════ -->
+<div id="p0">
+
+  <!-- Deep night sky with stars -->
+  <svg id="p0-bg" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <rect width="1200" height="900" fill="#000306"/>
+    <!-- stars — many sizes -->
+    <circle cx="80" cy="60" r="1.5" fill="#fff" opacity=".7"/>
+    <circle cx="180" cy="30" r="1" fill="#fff" opacity=".6"/>
+    <circle cx="290" cy="80" r="2" fill="#fff" opacity=".65"/>
+    <circle cx="420" cy="45" r="1.5" fill="#fff" opacity=".7"/>
+    <circle cx="550" cy="20" r="1" fill="#fff" opacity=".6"/>
+    <circle cx="660" cy="70" r="2" fill="#fff" opacity=".65"/>
+    <circle cx="800" cy="35" r="1.5" fill="#fff" opacity=".7"/>
+    <circle cx="920" cy="65" r="1" fill="#fff" opacity=".6"/>
+    <circle cx="1050" cy="28" r="2" fill="#fff" opacity=".65"/>
+    <circle cx="1140" cy="82" r="1.5" fill="#fff" opacity=".7"/>
+    <circle cx="140" cy="140" r="1" fill="#fff" opacity=".5"/>
+    <circle cx="340" cy="160" r="1.5" fill="#fff" opacity=".55"/>
+    <circle cx="500" cy="120" r="1" fill="#fff" opacity=".5"/>
+    <circle cx="720" cy="150" r="1.5" fill="#fff" opacity=".55"/>
+    <circle cx="900" cy="130" r="1" fill="#fff" opacity=".5"/>
+    <circle cx="1100" cy="145" r="1.5" fill="#fff" opacity=".55"/>
+    <circle cx="60" cy="200" r="2" fill="#fff" opacity=".45"/>
+    <circle cx="250" cy="220" r="1" fill="#fff" opacity=".45"/>
+    <circle cx="600" cy="200" r="1.5" fill="#fff" opacity=".45"/>
+    <circle cx="980" cy="190" r="1" fill="#fff" opacity=".45"/>
+    <!-- RADIANT STAR (8-pointed) -->
+    <path d="M600,55 L604,70 L620,70 L607,79 L612,95 L600,86 L588,95 L593,79 L580,70 L596,70 Z" fill="#c8dcff" opacity=".55"/>
+    <!-- FULL MOON -->
+    <circle cx="600" cy="160" r="100" fill="#2040a0" opacity=".18"/>
+    <circle cx="600" cy="160" r="78" fill="#3050b8" opacity=".14"/>
+    <circle cx="600" cy="160" r="56" fill="#4060c8" opacity=".16"/>
+    <!-- moon crescent overlay -->
+    <circle cx="630" cy="148" r="62" fill="#000306" opacity=".72"/>
+    <!-- MILKY WAY band subtle -->
+    <path d="M0,300 Q300,260 600,280 Q900,300 1200,265" stroke="#4060a0" fill="none" stroke-width="60" opacity=".06"/>
+  </svg>
+
+  <!-- Grand Mosque silhouette fills bottom -->
+  <svg id="p0-mosque" viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+    <g fill="#3060c0">
+      <!-- ground -->
+      <rect x="0" y="468" width="1200" height="32"/>
+      <!-- MASJID AN-NABAWI STYLE — grand, wide, symmetric -->
+      <!-- main body -->
+      <rect x="180" y="240" width="840" height="230"/>
+      <!-- cornice -->
+      <rect x="180" y="232" width="840" height="12"/>
+      <!-- GRAND GREEN DOME (center) -->
+      <ellipse cx="600" cy="230" rx="148" ry="124"/>
+      <!-- drum under dome -->
+      <rect x="492" y="230" width="216" height="42"/>
+      <rect x="480" y="268" width="240" height="12"/>
+      <!-- flanking large domes -->
+      <ellipse cx="375" cy="268" rx="82" ry="68"/>
+      <rect x="306" y="268" width="138" height="26"/>
+      <ellipse cx="825" cy="268" rx="82" ry="68"/>
+      <rect x="756" y="268" width="138" height="26"/>
+      <!-- smaller domes -->
+      <ellipse cx="240" cy="295" rx="52" ry="43"/>
+      <rect x="196" y="295" width="88" height="16"/>
+      <ellipse cx="960" cy="295" rx="52" ry="43"/>
+      <rect x="916" y="295" width="88" height="16"/>
+      <!-- TALL MINARETS (4 corner) -->
+      <!-- far left minaret -->
+      <rect x="108" y="108" width="42" height="362"/>
+      <rect x="100" y="84" width="58" height="30"/>
+      <path d="M100,84 Q129,60 158,84 Z"/>
+      <rect x="112" y="44" width="34" height="46"/>
+      <path d="M112,44 Q129,26 146,44 Z"/>
+      <rect x="121" y="12" width="16" height="36"/>
+      <path d="M121,12 Q129,-2 137,12 Q134,6 129,8 Q124,6 121,12 Z"/>
+      <!-- left minaret -->
+      <rect x="248" y="132" width="36" height="338"/>
+      <rect x="240" y="110" width="52" height="26"/>
+      <path d="M240,110 Q266,90 292,110 Z"/>
+      <rect x="250" y="74" width="32" height="40"/>
+      <path d="M250,74 Q266,58 282,74 Z"/>
+      <rect x="258" y="46" width="16" height="32"/>
+      <path d="M258,46 Q266,32 274,46 Q271,40 266,42 Q261,40 258,46 Z"/>
+      <!-- right minaret -->
+      <rect x="916" y="132" width="36" height="338"/>
+      <rect x="908" y="110" width="52" height="26"/>
+      <path d="M908,110 Q934,90 960,110 Z"/>
+      <rect x="918" y="74" width="32" height="40"/>
+      <path d="M918,74 Q934,58 950,74 Z"/>
+      <rect x="926" y="46" width="16" height="32"/>
+      <path d="M926,46 Q934,32 942,46 Q939,40 934,42 Q929,40 926,46 Z"/>
+      <!-- far right minaret -->
+      <rect x="1050" y="108" width="42" height="362"/>
+      <rect x="1042" y="84" width="58" height="30"/>
+      <path d="M1042,84 Q1071,60 1100,84 Z"/>
+      <rect x="1054" y="44" width="34" height="46"/>
+      <path d="M1054,44 Q1071,26 1088,44 Z"/>
+      <rect x="1063" y="12" width="16" height="36"/>
+      <path d="M1063,12 Q1071,-2 1079,12 Q1076,6 1071,8 Q1066,6 1063,12 Z"/>
+      <!-- ARCHED DOORWAYS large -->
+      <path d="M480,295 Q480,265 510,265 Q540,265 540,295 L540,470 L480,470 Z"/>
+      <path d="M558,290 Q558,260 588,260 Q618,260 618,290 L618,470 L558,470 Z"/>
+      <path d="M660,295 Q660,265 690,265 Q720,265 720,295 L720,470 L660,470 Z"/>
+      <path d="M348,305 Q348,278 374,278 Q400,278 400,305 L400,470 L348,470 Z"/>
+      <path d="M800,305 Q800,278 826,278 Q852,278 852,305 L852,470 L800,470 Z"/>
+      <!-- decorative band -->
+      <rect x="180" y="340" width="840" height="6"/>
+      <rect x="180" y="380" width="840" height="4"/>
+    </g>
+  </svg>
+
+  <!-- Radiant glow -->
+  <div id="p0-glow"></div>
+
+  <!-- Scrollable content -->
+  <div id="p0-scroll">
+    <div class="p-bismillah">﷽</div>
+    <div class="p-moon">☽</div>
+    <div class="p-name">مُحَمَّدٌ رَسُولُ اللَّهِ</div>
+    <div class="p-saw">ﷺ &nbsp;·&nbsp; PEACE AND BLESSINGS BE UPON HIM &nbsp;·&nbsp; ﷺ</div>
+    <div class="p-rule"></div>
+
+    <div class="p-ayah-card">
+      <div class="p-ayah-ar">وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ</div>
+      <div class="p-ayah-en">"And We have not sent you except as a mercy to all the worlds."</div>
+      <div class="p-ayah-ref">Surah Al-Anbiya 21:107 — سورة الأنبياء</div>
+    </div>
+
+    <div class="p-shame">Allah forgave you —<br><b>and this is how you act towards Him?</b></div>
+
+    <div class="p-heart">
+      <p>He ﷺ was sent as a mercy to every soul — including <em>yours.</em></p>
+      <p>He ﷺ stood in prayer at night until his feet swelled. When asked why, he said: <em>"Should I not be a grateful servant?"</em></p>
+      <p>On the Day of Judgment, every prophet will say <em>"Nafsi, nafsi — myself, myself."</em><br>He ﷺ alone will say: <em>"Ummati, ummati — my people, my people."</em></p>
+      <p>He ﷺ said: <em>"How I long to meet my brothers."</em> The Sahabah asked: are we not your brothers? He ﷺ said: <em>"You are my companions. My brothers are those who believed in me without ever seeing me."</em></p>
+      <p>He ﷺ wept for you. A stranger he would never meet in this life — and he stood before Allah, in tears, calling your name.</p>
+    </div>
+
+    <div class="p-call">Don't you want to meet him? ﷺ</div>
+
+    <div class="p-cnt">Saifullah has blocked <span id="cnt-p">—</span> attempts</div>
+    <a href="javascript:history.back()" class="p-btn">← Return to the Straight Path</a>
+  </div>
+</div>
+
+<script src="blocked.js"></script>
+</body>
+</html>
